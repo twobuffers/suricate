@@ -9,20 +9,25 @@ import org.gradle.api.JavaVersion
 object Versions {
     const val JAVA_VERSION_STR = "11"
     val JAVA_VERSION = JavaVersion.VERSION_11
+
+    const val ktlint = "0.34.0"
 }
 
-object GradlePlugins {
+object Deps {
+
+    // PLUGINS
+
     // https://developer.android.com/studio/releases/gradle-plugin
     // https://maven.google.com/web/index.html#com.android.tools.build:gradle
-    const val agpVersion = "7.1.2"
+    const val agpVersion = "7.2.1"
     const val androidGradlePlugin = "com.android.tools.build:gradle:$agpVersion"
+
     // https://github.com/vanniktech/gradle-maven-publish-plugin/blob/master/CHANGELOG.md
     const val gradleMavenPublishPlugin = "com.vanniktech:gradle-maven-publish-plugin:0.19.0"
+
     // https://github.com/ben-manes/gradle-versions-plugin/releases
     const val gradleVersionsPlugin = "com.github.ben-manes:gradle-versions-plugin:0.42.0"
     const val gradleVersionsPluginName = "com.github.ben-manes.versions"
-    // https://maven.google.com/web/index.html#com.google.gms:google-services
-    const val googleServices = "com.google.gms:google-services:4.3.10"
 }
 
 object Libs {
@@ -55,9 +60,13 @@ object Libs {
         // https://kotlinlang.org/docs/releases.html#release-details
         // https://github.com/JetBrains/kotlin/releases
         const val version = "1.6.10" // latest: 1.6.21, but better to wait to compose get support for 1.6.21
-        const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib:$version"
-        const val kotlinStdlib7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
-        const val kotlinStdlib8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
+        const val group = "org.jetbrains.kotlin"
+        const val artifactKotlinStdlib = "kotlin-stdlib"
+        const val artifactKotlinStdlib7 = "kotlin-stdlib-jdk7"
+        const val artifactKotlinStdlib8 = "kotlin-stdlib-jdk8"
+        const val kotlinStdlib = "$group:$artifactKotlinStdlib:$version"
+        const val kotlinStdlib7 = "$group:$artifactKotlinStdlib7:$version"
+        const val kotlinStdlib8 = "$group:$artifactKotlinStdlib8:$version"
         const val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
         const val kotlinTestJunit = "org.jetbrains.kotlin:kotlin-test-junit:$version"
         const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
@@ -65,8 +74,9 @@ object Libs {
 
     // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/
     // https://search.maven.org/search?q=g:org.jetbrains.kotlinx%20AND%20a:kotlinx-coroutines*
+    // CHANGELOG: https://github.com/Kotlin/kotlinx.coroutines/blob/master/CHANGES.md
     object Coroutines {
-        private const val version = "1.6.0"
+        private const val version = "1.6.3"
         const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val coroutinesRx2 = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$version"
         const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
@@ -202,7 +212,7 @@ object Libs {
         // https://maven.google.com/web/index.html#androidx.databinding
         object DataBinding {
             // https://mvnrepository.com/artifact/androidx.databinding/databinding-compiler
-            private const val version = GradlePlugins.agpVersion
+            private const val version = Deps.agpVersion
             const val databindingCompiler = "androidx.databinding:databinding-compiler:$version"
             const val databindingRuntime = "androidx.databinding:databinding-runtime:$version"
         }
@@ -402,8 +412,12 @@ object Libs {
 
     // SAAS
 
+    // INFO: https://developers.google.com/android/guides/releases
     object GooglePlayServices {
-        const val playServicesBase = "com.google.android.gms:play-services-base:17.3.0"
+        // INFO: https://developers.google.com/android/guides/google-services-plugin
+        // MVN:  https://maven.google.com/web/index.html#com.google.gms:google-services
+        const val gradlePlugin = "com.google.gms:google-services:4.3.13"
+        const val playServicesBase = "com.google.android.gms:play-services-base:17.6.0" // https://maven.google.com/web/index.html#com.google.android.gms:play-services-base
         const val playServicesAuthApiPhone = "com.google.android.gms:play-services-auth-api-phone:17.4.0"
         const val playServicesAdsIdentifier = "com.google.android.gms:play-services-ads-identifier:17.0.0"
         const val playServicesWallet = "com.google.android.gms:play-services-wallet:18.0.0"
@@ -411,6 +425,7 @@ object Libs {
         const val playServicesMaps = "com.google.android.gms:play-services-maps:17.0.0"
         const val playServicesLocation = "com.google.android.gms:play-services-location:17.0.0"
     }
+
 
     object Firebase {
         const val firebaseAnalytics = "com.google.firebase:firebase-analytics:20.1.0"        // https://maven.google.com/web/index.html#com.google.firebase:firebase-analytics
@@ -473,3 +488,6 @@ object Libs {
         const val suricate_0_0_1 = "com.github.twobuffers:suricate:0.0.1"
     }
 }
+
+// Alternative how to define dependencies:
+// https://github.com/ProteGO-Safe/android/blob/76a96eb9801b8cd9c83f4f221982cc5a93891eea/dependencies.gradle

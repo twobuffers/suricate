@@ -13,8 +13,8 @@ buildscript {
     dependencies {
         classpath(buildcfg.GradlePlugins.androidGradlePlugin)
         classpath(buildcfg.Libs.Kotlin.kotlinGradlePlugin)
-        classpath(buildcfg.GradlePlugins.gradleMavenPublishPlugin)
-        classpath(buildcfg.GradlePlugins.gradleVersionsPlugin)
+        classpath(buildcfg.Deps.gradleMavenPublishPlugin)
+        classpath(buildcfg.Deps.gradleVersionsPlugin)
     }
 }
 
@@ -45,7 +45,7 @@ subprojects {
     }
 }
 
-apply(plugin = buildcfg.GradlePlugins.gradleVersionsPluginName)
+apply(plugin = buildcfg.Deps.gradleVersionsPluginName)
 tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
     checkForGradleUpdate = false
     outputFormatter = "plain,html"
