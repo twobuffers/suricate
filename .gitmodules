@@ -1,0 +1,3 @@
+[submodule ".pass-store"]
+	path = .pass-store
+	url = git@github.com:twobuffers/twobuffers-pass-store.git

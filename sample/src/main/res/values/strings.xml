@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Suricate Sample</string>
+    <string name="status_label">status:</string>
+    <string name="connected_label">connected:</string>
+</resources>
