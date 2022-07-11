@@ -11,7 +11,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.launchIn
@@ -46,7 +45,7 @@ object Suricate {
     lateinit var okHttpClient: OkHttpClient
 
     private val _status = MutableSharedFlow<Status>()
-    val status: SharedFlow<Status> = _status
+    val status: Flow<Status> = _status.distinctUntilChanged()
     val connected: Flow<Boolean> = status.map { it == Status.Connected }
 
     lateinit var checkingJob: Job
